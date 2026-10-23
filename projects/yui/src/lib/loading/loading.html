@@ -1,0 +1,44 @@
+<span class="flex items-center justify-center" role="status" aria-label="Loading" aria-live="polite">
+  @if (type() === 'simple') {
+    <span
+      aria-hidden="true"
+      class="loading-spinner rounded-full border-2 border-skin-darker border-t-current"
+      [class.h-4]="size() === 'sm'"
+      [class.w-4]="size() === 'sm'"
+      [class.h-5]="size() === 'md'"
+      [class.w-5]="size() === 'md'"
+      [class.h-7]="size() === 'lg'"
+      [class.w-7]="size() === 'lg'"
+    ></span>
+  } @else if (type() === 'horizontal' || type() === 'horizonal') {
+    <span class="flex items-center gap-1.5" aria-hidden="true">
+      @for (dot of [0, 1, 2]; track dot) {
+        <span
+          class="loading-dot rounded-full bg-current"
+          [class.h-1]="size() === 'sm'"
+          [class.w-1]="size() === 'sm'"
+          [class.h-1.5]="size() === 'md'"
+          [class.w-1.5]="size() === 'md'"
+          [class.h-2]="size() === 'lg'"
+          [class.w-2]="size() === 'lg'"
+          [style.animation-delay.ms]="dot * 140"
+        ></span>
+      }
+    </span>
+  } @else {
+    <span class="flex items-center gap-1" aria-hidden="true">
+      @for (bar of [0, 1, 2]; track bar) {
+        <span
+          class="loading-bar rounded-full bg-current"
+          [class.h-3]="size() === 'sm'"
+          [class.h-4]="size() === 'md'"
+          [class.h-6]="size() === 'lg'"
+          [class.w-0.5]="size() === 'sm'"
+          [class.w-1]="size() !== 'sm'"
+          [style.animation-delay.ms]="bar * 110"
+        ></span>
+      }
+    </span>
+  }
+  <span class="sr-only">Loading...</span>
+</span>

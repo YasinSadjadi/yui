@@ -1,0 +1,78 @@
+@import 'boxicons/css/boxicons.css';
+@import 'tailwindcss';
+@source './lib';
+@source '../../uidocs/src';
+
+@theme {
+  --color-attention: #f15025;
+  --color-skin: #fdfffc;
+  --color-skin-dark: #e6e8e6;
+  --color-skin-darker: #c9cad9;
+  --color-semi-dark: #6e6e6e;
+  --color-dark: #191919;
+  --color-accent: #0b3954;
+  --color-danger: #fb2c36;
+  --color-add: #00a63e;
+  --color-low-attention: #1447e6;
+  --color-warning: #d08700;
+  --color-high-warning: #ca3500;
+}
+
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-attention: #ff906e;
+  --color-skin: #121c24;
+  --color-skin-dark: #0d151c;
+  --color-skin-darker: #2b3b47;
+  --color-semi-dark: #a4b2bd;
+  --color-dark: #f0f5f8;
+  --color-accent: #58b8dc;
+  --color-danger: #ff737c;
+  --color-add: #198b5a;
+  --color-low-attention: #7897ff;
+  --color-warning: #eab85d;
+  --color-high-warning: #ff835e;
+}
+
+/* Keep page and nested scroll areas aligned with the component palette. */
+:root,
+* {
+  scrollbar-color: color-mix(in srgb, var(--color-accent) 38%, var(--color-skin-darker)) transparent;
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-color: var(--color-skin-darker);
+  background-clip: content-box;
+  transition: background-color 160ms ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.3s ease-in-out forwards;
+}

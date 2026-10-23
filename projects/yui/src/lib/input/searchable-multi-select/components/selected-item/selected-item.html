@@ -1,0 +1,9 @@
+<div class="flex items-center justify-center px-3 py-2 rounded-xl bg-accent text-skin text-base gap-3 
+            border-2 border-transparent transition-all duration-200 hover:bg-accent/80 hover:text-white hover:border-accent
+            hover:shadow-sm hover:shadow-accent/50 
+            [&:has(.el:hover)]:bg-danger/30 [&:has(.el:hover)]:border-danger
+            [&:has(.el:hover)]:text-danger" >
+    <p class="font-semibold" >{{ title() }}</p >
+    <i class="bx bx-x font-bold transition-colors cursor-pointer duration-150 hover:text-danger el"
+       (click)="onDelete()" ></i >
+</div >

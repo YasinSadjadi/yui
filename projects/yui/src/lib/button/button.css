@@ -1,0 +1,48 @@
+:host {
+  display: block;
+}
+
+button {
+  border-color: var(--color-skin-darker, #c9cad9);
+}
+
+.submit-button {
+  color: var(--color-skin, #fdfffc);
+  background: var(--color-accent, #0b3954);
+}
+
+.primary-button {
+  color: var(--color-dark, #191919);
+  background: var(--color-skin-dark, #e6e8e6);
+}
+
+.reset-button {
+  color: var(--color-skin, #fdfffc);
+  background: var(--color-danger, #fb2c36);
+}
+
+.trash-button {
+  color: var(--color-dark, #191919);
+  background: var(--color-skin-dark, #e6e8e6);
+}
+
+.add-button {
+  color: var(--color-skin, #fdfffc);
+  background: var(--color-add, #00a63e);
+}
+
+.submit-button:hover,
+.primary-button:hover,
+.reset-button:hover {
+  color: var(--color-dark, #191919);
+  background: var(--color-skin, #fdfffc);
+}
+
+.trash-button:hover {
+  color: var(--color-skin, #fdfffc);
+  background: var(--color-danger, #fb2c36);
+}
+
+.add-button:hover {
+  background: color-mix(in srgb, var(--color-add, #00a63e) 70%, transparent);
+}

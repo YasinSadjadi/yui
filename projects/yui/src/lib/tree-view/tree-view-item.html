@@ -1,0 +1,36 @@
+<li role="treeitem" [attr.aria-expanded]="hasChildren ? expanded : null" [attr.aria-selected]="selectedId() === node().id" [attr.aria-disabled]="node().disabled || null">
+  <div class="flex min-w-0 items-center gap-1">
+    @if (hasChildren) {
+      <button type="button" class="tree-view-toggle" [disabled]="node().disabled" (click)="toggle.emit(node().id)" [attr.aria-label]="(expanded ? 'Collapse ' : 'Expand ') + node().label" [attr.aria-expanded]="expanded">
+        <i class="bx" [class.bx-chevron-down]="expanded" [class.bx-chevron-right]="!expanded" aria-hidden="true"></i>
+      </button>
+    } @else {
+      <span class="tree-view-spacer" aria-hidden="true"></span>
+    }
+
+    @if (node().routerLink) {
+      <a class="tree-view-label" [class.tree-view-selected]="selectedId() === node().id" [class.tree-view-disabled]="node().disabled" [routerLink]="node().routerLink" [attr.aria-current]="selectedId() === node().id ? 'page' : null" [attr.tabindex]="node().disabled ? -1 : 0" (click)="onActivate()">
+        @if (node().icon) { <i class="bx {{ node().icon }}" aria-hidden="true"></i> }
+        <span class="min-w-0 truncate">{{ node().label }}</span>
+      </a>
+    } @else if (node().href) {
+      <a class="tree-view-label" [class.tree-view-selected]="selectedId() === node().id" [class.tree-view-disabled]="node().disabled" [href]="node().disabled ? null : node().href" [attr.aria-current]="selectedId() === node().id ? 'page' : null" [attr.tabindex]="node().disabled ? -1 : 0" (click)="onActivate()">
+        @if (node().icon) { <i class="bx {{ node().icon }}" aria-hidden="true"></i> }
+        <span class="min-w-0 truncate">{{ node().label }}</span>
+      </a>
+    } @else {
+      <button type="button" class="tree-view-label" [class.tree-view-selected]="selectedId() === node().id" [class.tree-view-disabled]="node().disabled" [disabled]="node().disabled" (click)="onActivate()">
+        @if (node().icon) { <i class="bx {{ node().icon }}" aria-hidden="true"></i> }
+        <span class="min-w-0 truncate">{{ node().label }}</span>
+      </button>
+    }
+  </div>
+
+  @if (hasChildren && expanded) {
+    <ul role="group" class="tree-view-children">
+      @for (child of node().children; track child.id) {
+        <tasker-tree-view-item [node]="child" [level]="level() + 1" [expandedIds]="expandedIds()" [selectedId]="selectedId()" (toggle)="toggle.emit($event)" (activate)="activate.emit($event)" />
+      }
+    </ul>
+  }
+</li>

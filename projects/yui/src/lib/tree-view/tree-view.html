@@ -1,0 +1,9 @@
+<nav class="tree-view" [attr.aria-label]="label()">
+  <ul role="tree" class="space-y-1">
+    @for (item of items(); track item.id) {
+      <tasker-tree-view-item [node]="item" [expandedIds]="expandedIds()" [selectedId]="selectedId()" (toggle)="toggle($event)" (activate)="nodeSelected.emit($event)" />
+    } @empty {
+      <li class="px-3 py-2 text-sm text-semi-dark">No items.</li>
+    }
+  </ul>
+</nav>

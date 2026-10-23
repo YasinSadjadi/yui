@@ -1,0 +1,10 @@
+<div class="relative group bg-inherit h-full w-full">
+    <label
+            [for]="inputId()"
+            class="bg-skin text-semi-dark px-2 transition-all duration-100 absolute -top-3.5 start-2.5 z-10 rounded-full"
+            [ngClass]="{'group-hover:-top-6 group-focus-within:-top-6' : !isDisabled()}"
+    >
+        {{ title() }}
+    </label>
+    <ng-content/>
+</div>

@@ -1,0 +1,22 @@
+
+<div class="fixed right-4 top-4 z-50 flex w-[min(24rem,calc(100vw-2rem))] flex-col gap-3" aria-live="polite">
+  @for (notification of notifications(); track notification.id) {
+    <div
+      class="flex items-start gap-3 rounded-lg border border-skin-darker bg-skin px-4 py-3 text-dark shadow-lg"
+      [ngClass]="{
+        'border-add': notification.type === 'success',
+        'border-danger': notification.type === 'error',
+        'border-warning': notification.type === 'warning',
+        'border-accent': notification.type === 'info'
+      }"
+      [attr.role]="notification.type === 'error' ? 'alert' : 'status'"
+    >
+      <p class="grow text-sm">{{ notification.message }}</p>
+      @if (notification.showClose !== false) {
+        <button type="button" class="shrink-0 text-semi-dark hover:text-dark" aria-label="Dismiss notification" (click)="dismiss(notification)">
+          <i class="bx bx-x"></i>
+        </button>
+      }
+    </div>
+  }
+</div>

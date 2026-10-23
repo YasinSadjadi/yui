@@ -1,0 +1,1 @@
+﻿export type BadgeStatus = 'add' | 'low-attention' | 'warning' | 'danger' | 'default';

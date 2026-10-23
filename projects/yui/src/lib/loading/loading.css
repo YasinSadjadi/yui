@@ -1,0 +1,39 @@
+:host {
+  min-width: 1rem;
+  min-height: 1rem;
+}
+
+.loading-spinner {
+  animation: tasker-loading-spin 800ms linear infinite;
+}
+
+.loading-dot {
+  animation: tasker-loading-dot 900ms ease-in-out infinite;
+}
+
+.loading-bar {
+  transform-origin: center;
+  animation: tasker-loading-bar 700ms ease-in-out infinite;
+}
+
+@keyframes tasker-loading-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes tasker-loading-dot {
+  0%, 60%, 100% { opacity: 0.35; transform: scale(0.78); }
+  30% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes tasker-loading-bar {
+  0%, 100% { opacity: 0.35; transform: scaleY(0.55); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner,
+  .loading-dot,
+  .loading-bar {
+    animation: none;
+  }
+}

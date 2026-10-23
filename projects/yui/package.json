@@ -1,0 +1,16 @@
+{
+  "name": "yui",
+  "version": "0.1.0",
+  "description": "Reusable Angular UI components extracted from Tasker.",
+  "sideEffects": ["./styles.css"],
+  "exports": {
+    "./styles.css": "./styles.css"
+  },
+  "peerDependencies": {
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0",
+    "@angular/forms": "^20.0.0",
+    "@angular/platform-browser": "^20.0.0",
+    "rxjs": "^7.8.0"
+  }
+}

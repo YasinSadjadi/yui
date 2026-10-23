@@ -1,0 +1,10 @@
+<form class="flex flex-col items-center justify-center px-5 py-2"
+      (reset)="reset.emit()" >
+    <div class="w-full flex flex-col justify-center" >
+        <ng-content />
+    </div >
+    <div class="px-5 py-4 flex items-center justify-center gap-3 w-full" >
+        <tasker-button title="Submit" type="submit" class="w-20" [waiting]="isWaiting()" />
+        <tasker-button title="Reset" type="reset" class="w-20" />
+    </div >
+</form >

@@ -1,0 +1,7 @@
+node_modules/
+dist/
+out-tsc/
+.angular/
+*.tgz
+/projects/yui/src/styles.css
+/projects/yui/src/fonts/

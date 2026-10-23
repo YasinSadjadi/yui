@@ -1,0 +1,120 @@
+<div class="pt-6 w-full h-full" >
+    <tasker-input-label class="w-full h-full" [title]="title()" [inputId]="confirmedId()"
+                        [isDisabled]="disabledState()" >
+        @switch (type()) {
+            @case ('text') {
+                <input
+                    #input
+                    [id]="confirmedId()"
+                    [placeholder]="placeholder()"
+                    [value]="inputValue()"
+                    [disabled]="disabledState()"
+                    (input)="onValueChange()"
+                    class="border-2 p-2 rounded-lg border-skin-darker outline-none duration-150 bg-transparent w-full relative placeholder:text-skin-darker invalid:bg-danger disabled:opacity-50 disabled:cursor-not-allowed"
+                />
+            }
+            @case ('date') {
+                <div class="relative w-full" (keydown.escape)="closeCalendar()">
+                    <button
+                        [id]="confirmedId()"
+                        type="button"
+                        [disabled]="disabledState()"
+                        [attr.aria-expanded]="isCalendarOpen()"
+                        aria-haspopup="dialog"
+                        [attr.aria-controls]="confirmedId() + '-calendar'"
+                        (click)="toggleCalendar()"
+                        class="flex min-h-11 w-full items-center justify-between gap-3 rounded-lg border border-skin-darker bg-skin px-3.5 text-left text-sm text-dark shadow-sm outline-none transition hover:border-accent/60 focus:border-accent focus:ring-2 focus:ring-accent/20 disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                        <span [class.text-semi-dark]="!inputValue()">
+                            {{ inputValue() ? formatDate(inputValue()!) : (placeholder() || 'Select a date') }}
+                        </span>
+                        <i class="bx bx-calendar text-lg text-semi-dark" aria-hidden="true"></i>
+                    </button>
+
+                    @if (isCalendarOpen()) {
+                        <div
+                            [id]="confirmedId() + '-calendar'"
+                            role="dialog"
+                            aria-label="Choose a date"
+                            class="absolute left-0 top-full z-40 mt-2 w-[min(20rem,calc(100vw-2rem))] rounded-xl border border-skin-darker bg-skin p-4 shadow-xl shadow-black/10"
+                        >
+                            <div class="mb-4 flex items-center justify-between">
+                                <button type="button" aria-label="Previous month" (click)="changeMonth(-1)"
+                                        class="flex h-9 w-9 items-center justify-center rounded-lg text-semi-dark transition hover:bg-skin-dark hover:text-dark focus:outline-none focus:ring-2 focus:ring-accent/30">
+                                    <i class="bx bx-chevron-left text-xl" aria-hidden="true"></i>
+                                </button>
+                                <div class="text-center">
+                                    <p class="text-sm font-semibold text-dark">{{ monthLabel() }}</p>
+                                    <p class="mt-0.5 text-[11px] text-semi-dark">Choose a day</p>
+                                </div>
+                                <button type="button" aria-label="Next month" (click)="changeMonth(1)"
+                                        class="flex h-9 w-9 items-center justify-center rounded-lg text-semi-dark transition hover:bg-skin-dark hover:text-dark focus:outline-none focus:ring-2 focus:ring-accent/30">
+                                    <i class="bx bx-chevron-right text-xl" aria-hidden="true"></i>
+                                </button>
+                            </div>
+
+                            <div class="grid grid-cols-7 gap-1 text-center">
+                                @for (weekday of weekdays; track weekday) {
+                                    <span class="pb-2 text-[10px] font-semibold uppercase tracking-wide text-semi-dark">{{ weekday }}</span>
+                                }
+                                @for (day of calendarDays(); track day.iso) {
+                                    <button
+                                        type="button"
+                                        [attr.aria-label]="formatDate(day.iso)"
+                                        [attr.aria-pressed]="inputValue() === day.iso"
+                                        (click)="selectDate(day.iso)"
+                                        class="relative mx-auto flex h-9 w-9 items-center justify-center rounded-lg text-xs transition focus:outline-none focus:ring-2 focus:ring-accent/40"
+                                        [ngClass]="{
+                                            'text-semi-dark/45': !day.inCurrentMonth,
+                                            'text-dark hover:bg-skin-dark': day.inCurrentMonth && inputValue() !== day.iso,
+                                            'bg-accent font-semibold text-skin shadow-sm hover:bg-accent': inputValue() === day.iso,
+                                            'after:absolute after:bottom-1 after:h-1 after:w-1 after:rounded-full after:bg-accent': day.isToday && inputValue() !== day.iso
+                                        }"
+                                    >{{ day.date.getDate() }}</button>
+                                }
+                            </div>
+
+                            <div class="mt-4 flex items-center justify-between border-t border-skin-darker pt-3">
+                                <button type="button" (click)="selectToday()" class="rounded-md px-2 py-1.5 text-xs font-semibold text-accent transition hover:bg-accent/10">Today</button>
+                                <button type="button" (click)="clearDate()" [disabled]="!inputValue()" class="rounded-md px-2 py-1.5 text-xs text-semi-dark transition hover:bg-skin-dark hover:text-dark disabled:cursor-not-allowed disabled:opacity-40">Clear</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            @case ('textarea') {
+                <textarea
+                    #input
+                    [id]="confirmedId()"
+                    [placeholder]="placeholder()"
+                    [value]="inputValue()"
+                    [disabled]="disabledState()"
+                    (input)="onValueChange()"
+                    class="border-2 p-2 rounded-lg border-skin-darker outline-none duration-150 bg-transparent w-full h-full relative placeholder:text-skin-darker disabled:opacity-50 disabled:cursor-not-allowed"
+                ></textarea >
+            }
+            @case ('password') {
+                <div class="relative w-full">
+                    <input
+                        #input
+                        [id]="confirmedId()"
+                        [type]="isPasswordVisible() ? 'text' : 'password'"
+                        [placeholder]="placeholder()"
+                        [value]="inputValue()"
+                        [disabled]="disabledState()"
+                        (input)="onValueChange()"
+                        class="border-2 p-2 pr-10 rounded-lg border-skin-darker outline-none duration-150 bg-transparent w-full relative placeholder:text-skin-darker invalid:bg-danger disabled:opacity-50 disabled:cursor-not-allowed"
+                    />
+                    <button
+                        type="button"
+                        tabindex="-1"
+                        class="absolute right-2 top-1/2 -translate-y-1/2 text-skin-darker hover:text-semi-dark transition-colors duration-150 p-1"
+                        (click)="togglePassword()"
+                    >
+                        <i class="bx" [class.bx-show]="isPasswordVisible()" [class.bx-hide]="!isPasswordVisible()"></i>
+                    </button>
+                </div>
+            }
+        }
+    </tasker-input-label >
+</div >

@@ -1,0 +1,10 @@
+<div class="p-3 w-full h-full relative">
+  @if (title()) {
+    <h2 class="absolute top-0 z-10 left-1/2 transform -translate-x-1/2 bg-skin text-semi-dark px-2">
+      {{ title() }}
+    </h2>
+  }
+  <section class="w-full h-full border-2 border-skin-darker rounded-xl bg-transparent p-3">
+    <ng-content />
+  </section>
+</div>

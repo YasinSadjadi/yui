@@ -1,0 +1,17 @@
+<div
+        class="px-4 py-2 rounded-lg font-medium text-sm"
+        [ngClass]="{
+        'bg-add/20 text-add': type() === 'add',
+        'bg-low-attention/20 text-low-attention': type() === 'low-attention',
+        'bg-warning/20 text-warning': type() === 'warning',
+        'bg-danger/20 text-danger': type() === 'danger',
+        'bg-dark/20 text-dark': type() === 'default',
+        }"
+>
+  <span class="inline-flex items-center gap-1">
+    @if (icon()) {
+        <i class="bx {{ icon() }}"></i>
+    }
+      {{ text() }}
+  </span>
+</div>

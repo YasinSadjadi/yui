@@ -1,0 +1,36 @@
+{
+  "name": "yui-workspace",
+  "version": "0.1.0",
+  "description": "Reusable Angular UI components extracted from Tasker.",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "npm run build:styles && ng build yui",
+    "build:styles": "tailwindcss -i projects/yui/src/tailwind.css -o projects/yui/src/styles.css --minify && node scripts/fix-font-paths.mjs",
+    "build:uidocs": "npm run build:styles && ng build uidocs",
+    "uidocs": "npm run build:styles && ng serve uidocs --port 4300",
+    "pack:dry-run": "npm pack --dry-run ./dist/yui",
+    "publish:github": "node scripts/prepare-github-package.mjs && npm publish ./dist/yui --registry=https://npm.pkg.github.com"
+  },
+  "peerDependencies": {
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0",
+    "@angular/forms": "^20.0.0",
+    "@angular/platform-browser": "^20.0.0",
+    "rxjs": "^7.8.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^20.3.15",
+    "@angular/cli": "^20.3.24",
+    "@angular/compiler-cli": "^20.3.0",
+    "@angular/router": "^20.3.0",
+    "@tailwindcss/cli": "^4.1.18",
+    "@tailwindcss/postcss": "^4.1.18",
+    "boxicons": "^2.1.4",
+    "ng-packagr": "^20.3.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18",
+    "typescript": "~5.9.2"
+  }
+}

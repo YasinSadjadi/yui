@@ -1,0 +1,69 @@
+<div class="pt-6 w-full h-full flex flex-col justify-start items-stretch" >
+    <tasker-input-label [title]="title()" [inputId]="confirmedId()" class="p-1" [isDisabled]="disabledState()" >
+        <div class="relative w-full h-full" >
+            <div
+                class="h-full flex border-2 border-skin-darker rounded-md"
+                [style.width]="inputWidth() === '*' ? '100%' : inputWidth() + 'px'"
+                (click)="toggleDropdown()" >
+                <input #searchTermInput
+                       (input)="onSearchTermChange()" [id]="confirmedId()" [value]="searchValue()"
+                       [placeholder]="displayString()"
+                       [disabled]="disabledState()"
+                       class="border-skin-darker h-full flex-1 outline-none p-2 placeholder:text-skin-darker disabled:opacity-50 disabled:cursor-not-allowed" />
+                <button
+                    [attr.aria-expanded]="isOpen()"
+                    [id]="confirmedId() + 'Btn'"
+                    [disabled]="disabledState()"
+                    class="p-2 border-skin-darker outline-none duration-150 bg-transparent 
+                    h-full relative text-left flex justify-between items-center disabled:opacity-50 disabled:cursor-not-allowed"
+                    type="button"
+                >
+                    <i
+                        [class.-rotate-90]="isOpen()"
+                        class="bx bxs-chevron-left text-lg text-dark transition duration-200"
+                    ></i >
+                </button >
+            </div >
+
+            <div
+                (click)="onOptionClick($event)"
+                [ngClass]="{
+                    'opacity-0 scale-y-0': !isOpen(),
+                    'opacity-100 scale-y-100': isOpen(),
+                    }"
+                class="absolute left-0 right-0 mt-1 bg-skin border border-skin-darker rounded-lg shadow-lg z-30 transition-all duration-200 ease-in-out transform origin-top"
+            >
+                @if (isLoading()) {
+                    <tasker-loading class="w-full h-full" type="simple" />
+                } @else {
+                    @if (showItems().length == 0) {
+                        <p class="text-lg text-semi-dark text-center py-5" >Nothing to show</p >
+                    } @else {
+                        <ul >
+                            @for (option of showItems(); track $index) {
+                                <li
+                                    [attr.data-value]="option.value"
+                                    class="px-4 py-2 hover:bg-accent hover:text-skin active:bg-accent active:text-skin cursor-pointer border-b border-skin-darker last:border-b-0 last:rounded-b-lg first:rounded-t-lg transition-all duration-150"
+                                >
+                                    {{ option.title }}
+                                </li >
+                            }
+                        </ul >
+                    }
+                }
+            </div >
+        </div >
+    </tasker-input-label >
+    <div class="flex items-center justify-start pt-3 gap-2 overflow-x-auto
+     flex-1 transition-all duration-1000 ease-in-out" >
+        @for (item of selectedValues(); track item[identifierField()]) {
+            <tasker-selected-item
+                [title]="item[titleField()]" [identifier]="item[identifierField()]"
+                class="transition-all duration-300"
+                (delete)="onSelectedDelete($event)"
+                animate.leave="opacity-0"
+                animate.enter="fade-in"
+            />
+        }
+    </div >
+</div >

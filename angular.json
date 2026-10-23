@@ -1,0 +1,73 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "yui": {
+      "projectType": "library",
+      "root": "projects/yui",
+      "sourceRoot": "projects/yui/src",
+      "prefix": "yui",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "options": {
+            "project": "projects/yui/ng-package.json",
+            "tsConfig": "projects/yui/tsconfig.lib.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/yui/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    },
+    "uidocs": {
+      "projectType": "application",
+      "root": "projects/uidocs",
+      "sourceRoot": "projects/uidocs/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/uidocs/src/main.ts",
+            "index": "projects/uidocs/src/index.html",
+            "tsConfig": "projects/uidocs/tsconfig.app.json",
+            "assets": [],
+            "styles": ["projects/yui/src/styles.css"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "uidocs:build:production"
+            },
+            "development": {
+              "buildTarget": "uidocs:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "45feade2-d5de-408b-8fab-cc1773f96324"
+  }
+}

@@ -1,0 +1,48 @@
+<ol class="space-y-0" aria-label="Timeline">
+  @for (item of items(); track $index; let last = $last) {
+    <li class="relative flex gap-4 pb-7 last:pb-0">
+      @if (!last) {
+        <span
+          class="absolute left-[0.6875rem] top-6 h-[calc(100%-1rem)] w-px bg-skin-darker"
+          aria-hidden="true"
+        ></span>
+      }
+
+      <span
+        class="relative z-10 flex size-6 shrink-0 items-center justify-center rounded-full border-2"
+        [class.border-add]="item.status === 'complete'"
+        [class.bg-add]="item.status === 'complete'"
+        [class.text-skin]="item.status === 'complete'"
+        [class.border-accent]="item.status === 'current'"
+        [class.bg-skin]="item.status !== 'complete'"
+        [class.text-accent]="item.status !== 'complete'"
+        [class.border-skin-darker]="!item.status || item.status === 'upcoming'"
+        [attr.aria-label]="item.status || 'upcoming'"
+      >
+        @if (item.icon) {
+          <i class="bx text-sm" [class]="'bx ' + item.icon" aria-hidden="true"></i>
+        } @else if (item.status === 'complete') {
+          <i class="bx bx-check text-sm" aria-hidden="true"></i>
+        } @else {
+          <span class="size-1.5 rounded-full bg-current" aria-hidden="true"></span>
+        }
+      </span>
+
+      <div class="min-w-0 flex-1 pt-0.5">
+        <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <h3 class="font-semibold text-dark">{{ item.title }}</h3>
+          @if (item.date) {
+            <time class="text-xs text-semi-dark">{{ item.date }}</time>
+          }
+        </div>
+        @if (item.description) {
+          <p class="mt-1 text-sm leading-6 text-semi-dark">{{ item.description }}</p>
+        }
+      </div>
+    </li>
+  } @empty {
+    <li class="rounded-lg border border-dashed border-skin-darker px-4 py-6 text-center text-sm text-semi-dark">
+      No timeline items.
+    </li>
+  }
+</ol>
