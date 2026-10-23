@@ -1,5 +1,6 @@
 # yui
 
+[![Build](https://github.com/YasinSadjadi/yui/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/YasinSadjadi/yui/actions/workflows/build.yml)
 Reusable Angular UI components and an interactive component gallery, built with Angular 20.
 
 The repository contains two Angular projects:
@@ -63,7 +64,7 @@ npm run build
 npm run pack:dry-run
 ```
 
-The distributable package is generated in `dist/yui`. To install that build into another local Angular application:
+The distributable Angular Package Format output is generated in `dist/yui`. GitHub Actions builds and validates this package on pushes to `main` and pull requests targeting `main`; the built package is also available as a workflow artifact. To install a local build into another Angular application:
 
 ```bash
 npm install /path/to/AngularComponents/dist/yui
@@ -176,5 +177,6 @@ npm run build:uidocs
 ## License
 
 No `LICENSE` file is currently included. Until a license is added, the repository does not grant permission to reuse, modify, or redistribute its contents.
+
 
 
