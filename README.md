@@ -147,7 +147,7 @@ document.documentElement.dataset.theme = 'dark'; // Set to 'light' to switch bac
 
 ## Publish to GitHub Packages
 
-The repository includes a GitHub Actions workflow that builds and publishes the package to GitHub Packages when a `v*` tag is pushed. It can also be run manually from the Actions tab. The package is published under the repository owner's scope (`@YasinSadjadi/yui`).
+The repository includes a GitHub Actions workflow that builds and publishes the package to GitHub Packages when a `v*` tag is pushed. It can also be run manually from the Actions tab. The package is published under the repository owner's scope (`@yasinsadjadi/yui`).
 
 To publish a release, create and push a version tag, for example:
 
@@ -159,7 +159,7 @@ git push origin v0.1.0
 Consumers can install the package with:
 
 ```bash
-npm install @YasinSadjadi/yui
+npm install @yasinsadjadi/yui
 ```
 
 GitHub Packages authentication and registry setup may be required in the consuming project.
@@ -176,4 +176,5 @@ npm run build:uidocs
 ## License
 
 No `LICENSE` file is currently included. Until a license is added, the repository does not grant permission to reuse, modify, or redistribute its contents.
+
 
