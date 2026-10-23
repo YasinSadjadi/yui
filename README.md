@@ -3,6 +3,8 @@
 [![Build](https://github.com/YasinSadjadi/yui/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/YasinSadjadi/yui/actions/workflows/build.yml)
 Reusable Angular UI components and an interactive component gallery, built with Angular 20.
 
+[Live component gallery](https://yasinsadjadi.github.io/yui/)
+
 The repository contains two Angular projects:
 
 - **`yui`** — a reusable component library with typed APIs and bundled styles.
@@ -10,6 +12,7 @@ The repository contains two Angular projects:
 
 ## Contents
 
+- [Live demo](https://yasinsadjadi.github.io/yui/)
 - [Features](#features)
 - [Requirements](#requirements)
 - [Run the component gallery](#run-the-component-gallery)
@@ -32,7 +35,7 @@ The library currently includes:
 - Page layouts, sections, and tool containers
 - Timelines and nested tree navigation
 
-The `uidocs` gallery provides example pages for these components. Searchable inputs and the grid use an in-memory mock API so the examples run without a backend service.
+The `uidocs` gallery provides example pages for these components and is published on [GitHub Pages](https://yasinsadjadi.github.io/yui/). GitHub Actions rebuilds the demo when changes are pushed to `main`. Searchable inputs and the grid use an in-memory mock API so the examples run without a backend service.
 
 ## Requirements
 
@@ -177,6 +180,8 @@ npm run build:uidocs
 ## License
 
 No `LICENSE` file is currently included. Until a license is added, the repository does not grant permission to reuse, modify, or redistribute its contents.
+
+
 
 
 
