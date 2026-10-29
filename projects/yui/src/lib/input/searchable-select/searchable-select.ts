@@ -1,3 +1,5 @@
+import { inject as injectYui } from '@angular/core';
+import { YuiI18n } from '../../i18n';
 import {
     Component,
     computed,
@@ -29,6 +31,7 @@ import {debounceTime, Subject} from 'rxjs';
     ],
 })
 export class SearchableSelect implements ControlValueAccessor, OnInit, OnDestroy {
+  protected readonly i18n = injectYui(YuiI18n);
 
     url = input.required<string>();
     titleField = input.required<string>();

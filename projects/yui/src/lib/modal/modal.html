@@ -15,8 +15,8 @@
                 <h3 class="flex-1 text-sm font-semibold">{{ modalData()?.title }}</h3>
                 <button
                     type="button"
-                    aria-label="Close modal"
-                    class="ml-3 flex h-8 w-8 items-center justify-center rounded-lg text-semi-dark transition hover:bg-skin-darker/50 hover:text-dark focus:outline-none focus:ring-2 focus:ring-accent/40 active:scale-95"
+                    [attr.aria-label]="i18n.messages().closeModal"
+                    class="ms-3 flex h-8 w-8 items-center justify-center rounded-lg text-semi-dark transition hover:bg-skin-darker/50 hover:text-dark focus:outline-none focus:ring-2 focus:ring-accent/40 active:scale-95"
                     (click)="onModalClose()"
                 >
                     <i class="bx bx-x text-xl" aria-hidden="true"></i>

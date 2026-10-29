@@ -1,4 +1,4 @@
-<span class="flex items-center justify-center" role="status" aria-label="Loading" aria-live="polite">
+<span class="flex items-center justify-center" role="status" [attr.aria-label]="i18n.messages().loading" aria-live="polite">
   @if (type() === 'simple') {
     <span
       aria-hidden="true"
@@ -40,5 +40,5 @@
       }
     </span>
   }
-  <span class="sr-only">Loading...</span>
+  <span class="sr-only">{{ i18n.messages().loadingMore }}</span>
 </span>

@@ -1,3 +1,5 @@
+import { inject as injectYui } from '@angular/core';
+import { YuiI18n } from '../i18n';
 import {
     Component,
     effect,
@@ -18,6 +20,7 @@ import {ModalData} from './modal-model';
     templateUrl: './modal.html',
 })
 export class Modal implements OnInit, OnDestroy {
+  protected readonly i18n = injectYui(YuiI18n);
     private modalService = inject(ModalService);
 
     private subs = new SubscriptionSink();

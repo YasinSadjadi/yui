@@ -10,9 +10,9 @@
             @if (haveAddButton()) {
                 <tasker-button
                         type="add"
-                        title="Add New"
+                        [title]="i18n.messages().addNew"
                         icon="bx-plus"
-                        class="ml-auto shrink-0"
+                        class="ms-auto shrink-0"
                         (click)="onAddButtonClicked()"
                 />
             }
@@ -30,8 +30,8 @@
                     <i class="bx bx-error-circle text-2xl"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-semibold text-dark">Couldn't load items</p>
-                    <p class="mt-1 text-xs text-semi-dark">Check your connection and try again.</p>
+                    <p class="text-sm font-semibold text-dark">{{ i18n.messages().loadError }}</p>
+                    <p class="mt-1 text-xs text-semi-dark">{{ i18n.messages().checkConnection }}</p>
                 </div>
                 <button
                         type="button"
@@ -47,8 +47,8 @@
                     <i class="bx bx-inbox text-2xl"></i>
                 </div>
                 <div class="text-center">
-                    <p class="text-sm font-semibold text-dark">No items to display</p>
-                    <p class="mt-1 text-xs text-semi-dark">Items will appear here when they are available.</p>
+                    <p class="text-sm font-semibold text-dark">{{ i18n.messages().emptyGrid }}</p>
+                    <p class="mt-1 text-xs text-semi-dark">{{ i18n.messages().emptyGridHint }}</p>
                 </div>
             </div>
         } @else {
@@ -60,7 +60,7 @@
                                     scope="col"
                                     [style.width.%]="columnWidth(columnIndex)"
                                     [title]="key | titlecase"
-                                    class="truncate border-b border-skin-darker px-3 py-3 text-left text-[10px] font-semibold uppercase tracking-widest text-semi-dark first:pl-4 last:pr-4 sm:px-4 sm:first:pl-5 sm:last:pr-5"
+                                    class="truncate border-b border-skin-darker px-3 py-3 text-start text-[10px] font-semibold uppercase tracking-widest text-semi-dark first:ps-4 last:pe-4 sm:px-4 sm:first:ps-5 sm:last:pe-5"
                             >
                                 {{ key | titlecase }}
                             </th>
@@ -69,7 +69,7 @@
                             <th
                                     scope="col"
                                     [style.width.%]="visibleFields().length === 0 ? 100 : 14"
-                                    class="truncate border-b border-skin-darker px-3 py-3 text-right text-[10px] font-semibold uppercase tracking-widest text-semi-dark first:pl-4 last:pr-4 sm:px-4 sm:first:pl-5 sm:last:pr-5"
+                                    class="truncate border-b border-skin-darker px-3 py-3 text-end text-[10px] font-semibold uppercase tracking-widest text-semi-dark first:ps-4 last:pe-4 sm:px-4 sm:first:ps-5 sm:last:pe-5"
                             >
                                 Actions
                             </th>
@@ -87,13 +87,13 @@
                                 <td
                                         [style.width.%]="columnWidth(columnIndex)"
                                         [title]="item[key]"
-                                        class="truncate whitespace-nowrap px-3 py-3 text-sm text-dark first:pl-4 last:pr-4 sm:px-4 sm:first:pl-5 sm:last:pr-5"
+                                        class="truncate whitespace-nowrap px-3 py-3 text-sm text-dark first:ps-4 last:pe-4 sm:px-4 sm:first:ps-5 sm:last:pe-5"
                                 >
                                     {{ item[key] }}
                                 </td>
                             }
                             @for (template of additionalColumnTemplates(); track $index) {
-                                <td class="truncate whitespace-nowrap px-3 py-3 text-right text-sm first:pl-4 last:pr-4 sm:px-4 sm:first:pl-5 sm:last:pr-5">
+                                <td class="truncate whitespace-nowrap px-3 py-3 text-end text-sm first:ps-4 last:pe-4 sm:px-4 sm:first:ps-5 sm:last:pe-5">
                                     <ng-container
                                             [ngTemplateOutlet]="template"
                                             [ngTemplateOutletContext]="{ $implicit: item }"
@@ -110,29 +110,29 @@
     @if (isPageable()) {
         <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-skin-darker bg-skin px-4 py-3">
             <label class="flex items-center gap-2 whitespace-nowrap text-xs text-semi-dark">
-                <span>Rows per page</span>
+                <span>{{ i18n.messages().rowsPerPage }}</span>
                 <span class="relative">
                     <select
-                            aria-label="Rows per page"
+                            [attr.aria-label]="i18n.messages().rowsPerPage"
                             [value]="pageSize()"
                             (change)="onPageSizeChanged($any($event.target).value)"
-                            class="h-8 min-w-16 appearance-none rounded-md border border-skin-darker bg-skin px-2.5 pr-7 text-xs font-medium text-dark outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/15"
+                            class="h-8 min-w-16 appearance-none rounded-md border border-skin-darker bg-skin px-2.5 pe-7 text-xs font-medium text-dark outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/15"
                     >
                         @for (option of pageSizeItems(); track option.value) {
                             <option [value]="option.value">{{ option.title }}</option>
                         }
                     </select>
-                    <i class="bx bx-chevron-down pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-sm text-semi-dark"></i>
+                    <i class="bx bx-chevron-down pointer-events-none absolute end-1.5 top-1/2 -translate-y-1/2 text-sm text-semi-dark"></i>
                 </span>
             </label>
 
-            <div class="ml-auto flex items-center gap-3">
-                <span class="whitespace-nowrap text-xs text-semi-dark">{{ rangeStart() }}–{{ rangeEnd() }} of {{ totalCount() }}</span>
-                <div class="flex items-center gap-1" role="group" aria-label="Pagination">
+            <div class="ms-auto flex items-center gap-3">
+                <span class="whitespace-nowrap text-xs text-semi-dark">{{ rangeStart() }}–{{ rangeEnd() }} {{ i18n.messages().of }} {{ totalCount() }}</span>
+                <div class="flex items-center gap-1" role="group" [attr.aria-label]="i18n.messages().pagination">
                     <button
                             (click)="onPrevPage()"
                             [disabled]="isFirstPage()"
-                            aria-label="Previous page"
+                            [attr.aria-label]="i18n.messages().previousPage"
                             class="flex h-8 w-8 items-center justify-center rounded-md text-semi-dark transition hover:bg-skin-dark hover:text-dark disabled:cursor-not-allowed disabled:opacity-35"
                     >
                         <i class="bx bx-chevron-left text-lg"></i>
@@ -141,7 +141,7 @@
                     <button
                             (click)="onNextPage()"
                             [disabled]="isLastPage()"
-                            aria-label="Next page"
+                            [attr.aria-label]="i18n.messages().nextPage"
                             class="flex h-8 w-8 items-center justify-center rounded-md text-semi-dark transition hover:bg-skin-dark hover:text-dark disabled:cursor-not-allowed disabled:opacity-35"
                     >
                         <i class="bx bx-chevron-right text-lg"></i>

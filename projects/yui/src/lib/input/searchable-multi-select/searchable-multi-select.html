@@ -15,7 +15,7 @@
                     [id]="confirmedId() + 'Btn'"
                     [disabled]="disabledState()"
                     class="p-2 border-skin-darker outline-none duration-150 bg-transparent 
-                    h-full relative text-left flex justify-between items-center disabled:opacity-50 disabled:cursor-not-allowed"
+                    h-full relative text-start flex justify-between items-center disabled:opacity-50 disabled:cursor-not-allowed"
                     type="button"
                 >
                     <i
@@ -37,7 +37,7 @@
                     <tasker-loading class="w-full h-full" type="simple" />
                 } @else {
                     @if (showItems().length == 0) {
-                        <p class="text-lg text-semi-dark text-center py-5" >Nothing to show</p >
+                        <p class="text-lg text-semi-dark text-center py-5" >{{ i18n.messages().nothingToShow }}</p >
                     } @else {
                         <ul >
                             @for (option of showItems(); track $index) {

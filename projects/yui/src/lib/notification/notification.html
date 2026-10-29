@@ -13,7 +13,7 @@
     >
       <p class="grow text-sm">{{ notification.message }}</p>
       @if (notification.showClose !== false) {
-        <button type="button" class="shrink-0 text-semi-dark hover:text-dark" aria-label="Dismiss notification" (click)="dismiss(notification)">
+        <button type="button" class="shrink-0 text-semi-dark hover:text-dark" [attr.aria-label]="i18n.messages().dismiss" (click)="dismiss(notification)">
           <i class="bx bx-x"></i>
         </button>
       }

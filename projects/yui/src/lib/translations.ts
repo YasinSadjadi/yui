@@ -1,0 +1,9 @@
+import { YuiMessages } from './i18n';
+
+export const YUI_FA: YuiMessages = {
+  loading: 'در حال بارگذاری', loadingMore: 'در حال بارگذاری...', closeModal: 'بستن پنجره', dismiss: 'بستن اعلان', timeline: 'خط زمان', upcoming: 'پیش رو', navigation: 'ناوبری', noItems: 'موردی وجود ندارد.', expand: 'باز کردن', collapse: 'بستن', submit: 'ثبت', reset: 'بازنشانی', addNew: 'افزودن', loadError: 'بارگذاری موارد ناموفق بود', checkConnection: 'اتصال خود را بررسی و دوباره تلاش کنید.', emptyGrid: 'موردی برای نمایش وجود ندارد', emptyGridHint: 'موارد موجود در اینجا نمایش داده می‌شوند.', rowsPerPage: 'تعداد سطر در صفحه', of: 'از', pagination: 'صفحه‌بندی', previousPage: 'صفحه قبل', nextPage: 'صفحه بعد', selectDate: 'انتخاب تاریخ', chooseDate: 'انتخاب تاریخ', previousMonth: 'ماه قبل', nextMonth: 'ماه بعد', chooseDay: 'انتخاب روز', today: 'امروز', clear: 'پاک کردن', nothingToShow: 'موردی برای نمایش وجود ندارد', selectItems: 'انتخاب موارد...', selected: 'مورد انتخاب شده'
+};
+
+export const YUI_FR: YuiMessages = {
+  loading: 'Chargement', loadingMore: 'Chargement...', closeModal: 'Fermer la fenêtre', dismiss: 'Fermer la notification', timeline: 'Chronologie', upcoming: 'À venir', navigation: 'Navigation', noItems: 'Aucun élément.', expand: 'Développer', collapse: 'Réduire', submit: 'Envoyer', reset: 'Réinitialiser', addNew: 'Ajouter', loadError: 'Impossible de charger les éléments', checkConnection: 'Vérifiez votre connexion et réessayez.', emptyGrid: 'Aucun élément à afficher', emptyGridHint: 'Les éléments disponibles apparaîtront ici.', rowsPerPage: 'Lignes par page', of: 'sur', pagination: 'Pagination', previousPage: 'Page précédente', nextPage: 'Page suivante', selectDate: 'Sélectionner une date', chooseDate: 'Choisir une date', previousMonth: 'Mois précédent', nextMonth: 'Mois suivant', chooseDay: 'Choisir un jour', today: "Aujourd’hui", clear: 'Effacer', nothingToShow: 'Rien à afficher', selectItems: 'Sélectionner des éléments...', selected: 'sélectionné(s)'
+};

@@ -1,3 +1,5 @@
+import { inject as injectYui } from '@angular/core';
+import { YuiI18n } from '../i18n';
 import {
     Component,
     computed,
@@ -24,6 +26,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
     ],
 })
 export class Input implements ControlValueAccessor, OnInit {
+  protected readonly i18n = injectYui(YuiI18n);
     type = input<'text' | 'textarea' | 'date' | 'password'>('text');
     title = input.required<string>();
     id = input<string>();
@@ -34,9 +37,9 @@ export class Input implements ControlValueAccessor, OnInit {
     protected isPasswordVisible = signal<boolean>(false);
     protected isCalendarOpen = signal<boolean>(false);
     protected currentMonth = signal<Date>(startOfMonth(new Date()));
-    protected readonly weekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+    protected readonly weekdays = computed(() => Array.from({ length: 7 }, (_, i) => new Intl.DateTimeFormat(this.i18n.locale(), { weekday: 'short' }).format(new Date(2023, 0, 1 + i))));
     protected readonly monthLabel = computed(() =>
-        new Intl.DateTimeFormat(undefined, { month: 'long', year: 'numeric' }).format(this.currentMonth()),
+        new Intl.DateTimeFormat(this.i18n.locale(), { month: 'long', year: 'numeric', calendar: 'gregory' }).format(this.currentMonth()),
     );
     protected readonly calendarDays = computed(() => {
         const month = this.currentMonth();
@@ -138,7 +141,7 @@ export class Input implements ControlValueAccessor, OnInit {
 
     formatDate(value: string): string {
         if (!isDateKey(value)) return value;
-        return new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' }).format(parseDateKey(value));
+        return new Intl.DateTimeFormat(this.i18n.locale(), { dateStyle: 'medium', calendar: 'gregory' }).format(parseDateKey(value));
     }
 
     private commitDate(value: string | null): void {
@@ -184,3 +187,4 @@ function parseDateKey(value: string): Date {
     const [year, month, day] = value.split('-').map(Number);
     return new Date(year, month - 1, day);
 }
+

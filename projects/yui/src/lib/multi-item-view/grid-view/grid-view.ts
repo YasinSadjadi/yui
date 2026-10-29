@@ -1,3 +1,5 @@
+import { inject as injectYui } from '@angular/core';
+import { YuiI18n } from '../../i18n';
 import {
   Component,
   computed,
@@ -24,6 +26,7 @@ import {RefreshableGridView} from './grid-view-model';
   providers: [TitleCasePipe],
 })
 export class GridView implements OnInit, OnDestroy, RefreshableGridView {
+  protected readonly i18n = injectYui(YuiI18n);
   url = input<string>('');
   items = input<any[]>([]);
   additionalUrlParams = input<any>({});

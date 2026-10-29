@@ -16,6 +16,7 @@
   color: var(--color-semi-dark, #555);
   background: transparent;
   cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
 }
 
 .tree-view-toggle:hover { background: var(--color-skin-dark, #e6e8e6); }
@@ -34,13 +35,24 @@
   border-radius: 0.5rem;
   color: var(--color-dark, #191919);
   background: transparent;
-  text-align: left;
+  text-align: start;
   text-decoration: none;
   cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
 }
 
 .tree-view-label:hover { background: var(--color-skin-dark, #e6e8e6); }
 .tree-view-selected { color: var(--color-accent, #0b3954); background: color-mix(in srgb, var(--color-accent, #0b3954) 12%, transparent); font-weight: 600; }
 .tree-view-selected:hover { background: color-mix(in srgb, var(--color-accent, #0b3954) 18%, transparent); }
 .tree-view-disabled { opacity: 0.5; cursor: not-allowed; }
-.tree-view-children { margin-left: 0.875rem; padding-left: 0.75rem; border-left: 1px solid var(--color-skin-darker, #c9cad9); }
+.tree-view-chevron { transition: transform 220ms ease; }
+.tree-view-chevron-expanded { transform: rotate(90deg); }
+:host(:dir(rtl)) .tree-view-chevron { transform: rotate(180deg); }
+:host(:dir(rtl)) .tree-view-chevron-expanded { transform: rotate(90deg); }
+.tree-view-branch { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 220ms ease, opacity 180ms ease; }
+.tree-view-branch-expanded { grid-template-rows: 1fr; opacity: 1; }
+.tree-view-branch-inner { min-height: 0; overflow: hidden; }
+.tree-view-children { margin-inline-start: 0.875rem; padding-inline-start: 0.75rem; border-inline-start: 1px solid var(--color-skin-darker, #c9cad9); }
+@media (prefers-reduced-motion: reduce) {
+  .tree-view-toggle, .tree-view-label, .tree-view-chevron, .tree-view-branch { transition: none; }
+}

@@ -1,3 +1,5 @@
+import { inject as injectYui } from '@angular/core';
+import { YuiI18n } from '../i18n';
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -7,8 +9,10 @@ import { TreeViewNode } from './tree-view-node';
   selector: 'tasker-tree-view-item',
   standalone: false,
   templateUrl: './tree-view-item.html',
+  styleUrls: ['./tree-view.css'],
 })
 export class TreeViewItemComponent {
+  protected readonly i18n = injectYui(YuiI18n);
   node = input.required<TreeViewNode>();
   level = input(1);
   expandedIds = input.required<ReadonlySet<string>>();

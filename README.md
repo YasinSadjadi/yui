@@ -185,3 +185,7 @@ No `LICENSE` file is currently included. Until a license is added, the repositor
 
 
 
+
+### Language and direction
+
+Inject `YuiI18n` and call `setLanguage('fa', YUI_FA)` or `setLanguage('fr', YUI_FR)` to change the library's built-in messages at runtime. Import these from the library. Pass a partial `YuiMessages` object to override or add translations; unspecified messages fall back to English. Set the `lang` and `dir` attributes on your application root (for example, `lang="fa" dir="rtl"`) to control inherited language and layout direction. Labels and data supplied by the application should be translated by the application. The date picker uses the browser's Gregorian calendar with localized labels.

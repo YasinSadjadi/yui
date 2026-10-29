@@ -1,9 +1,9 @@
-<ol class="space-y-0" aria-label="Timeline">
+<ol class="space-y-0" [attr.aria-label]="i18n.messages().timeline">
   @for (item of items(); track $index; let last = $last) {
     <li class="relative flex gap-4 pb-7 last:pb-0">
       @if (!last) {
         <span
-          class="absolute left-[0.6875rem] top-6 h-[calc(100%-1rem)] w-px bg-skin-darker"
+          class="absolute start-[0.6875rem] top-6 h-[calc(100%-1rem)] w-px bg-skin-darker"
           aria-hidden="true"
         ></span>
       }
@@ -17,7 +17,7 @@
         [class.bg-skin]="item.status !== 'complete'"
         [class.text-accent]="item.status !== 'complete'"
         [class.border-skin-darker]="!item.status || item.status === 'upcoming'"
-        [attr.aria-label]="item.status || 'upcoming'"
+        [attr.aria-label]="item.status || i18n.messages().upcoming"
       >
         @if (item.icon) {
           <i class="bx text-sm" [class]="'bx ' + item.icon" aria-hidden="true"></i>

@@ -38,3 +38,6 @@ export * from './lib/tree-view/tree-view-module';
 export * from './lib/tree-view/tree-view';
 export * from './lib/models/api-list-result';
 export * from './lib/utils/subscription-sink';
+
+export * from './lib/i18n';
+export * from './lib/translations';

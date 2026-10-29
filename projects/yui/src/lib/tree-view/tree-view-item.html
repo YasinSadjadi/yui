@@ -1,8 +1,8 @@
 <li role="treeitem" [attr.aria-expanded]="hasChildren ? expanded : null" [attr.aria-selected]="selectedId() === node().id" [attr.aria-disabled]="node().disabled || null">
   <div class="flex min-w-0 items-center gap-1">
     @if (hasChildren) {
-      <button type="button" class="tree-view-toggle" [disabled]="node().disabled" (click)="toggle.emit(node().id)" [attr.aria-label]="(expanded ? 'Collapse ' : 'Expand ') + node().label" [attr.aria-expanded]="expanded">
-        <i class="bx" [class.bx-chevron-down]="expanded" [class.bx-chevron-right]="!expanded" aria-hidden="true"></i>
+      <button type="button" class="tree-view-toggle" [disabled]="node().disabled" (click)="toggle.emit(node().id)" [attr.aria-label]="(expanded ? i18n.messages().collapse : i18n.messages().expand) + ' ' + node().label" [attr.aria-expanded]="expanded">
+        <i class="bx bx-chevron-right tree-view-chevron" [class.tree-view-chevron-expanded]="expanded" aria-hidden="true"></i>
       </button>
     } @else {
       <span class="tree-view-spacer" aria-hidden="true"></span>
@@ -26,11 +26,15 @@
     }
   </div>
 
-  @if (hasChildren && expanded) {
-    <ul role="group" class="tree-view-children">
-      @for (child of node().children; track child.id) {
-        <tasker-tree-view-item [node]="child" [level]="level() + 1" [expandedIds]="expandedIds()" [selectedId]="selectedId()" (toggle)="toggle.emit($event)" (activate)="activate.emit($event)" />
-      }
-    </ul>
+  @if (hasChildren) {
+    <div class="tree-view-branch" [class.tree-view-branch-expanded]="expanded" [attr.inert]="expanded ? null : ''" [attr.aria-hidden]="expanded ? null : 'true'">
+      <div class="tree-view-branch-inner">
+        <ul role="group" class="tree-view-children">
+          @for (child of node().children; track child.id) {
+            <tasker-tree-view-item [node]="child" [level]="level() + 1" [expandedIds]="expandedIds()" [selectedId]="selectedId()" (toggle)="toggle.emit($event)" (activate)="activate.emit($event)" />
+          }
+        </ul>
+      </div>
+    </div>
   }
 </li>

@@ -1,3 +1,5 @@
+import { inject as injectYui } from '@angular/core';
+import { YuiI18n } from '../../i18n';
 import {
     Component,
     computed,
@@ -28,6 +30,7 @@ import {debounceTime, Subject} from 'rxjs';
     ],
 })
 export class SearchableMultiSelect implements ControlValueAccessor, OnInit, OnDestroy {
+  protected readonly i18n = injectYui(YuiI18n);
 
     url = input.required<string>();
     titleField = input.required<string>();
@@ -46,9 +49,9 @@ export class SearchableMultiSelect implements ControlValueAccessor, OnInit, OnDe
 
     displayString = computed<string>(() => {
         const count = this.selectedValues().length;
-        if (count === 0) return 'Select items...';
+        if (count === 0) return this.i18n.messages().selectItems;
 
-        return `${count} item${count > 1 ? 's' : ''} selected`;
+        return `${count} ${this.i18n.messages().selected}`;
     });
     protected items = signal<any[]>([]);
     showSelectOptions = computed(() => this.items().filter((item) => {
