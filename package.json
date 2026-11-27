@@ -11,6 +11,7 @@
     "build:uidocs": "npm run build:styles && ng build uidocs",
     "uidocs": "npm run build:styles && ng serve uidocs --port 4300",
     "pack:dry-run": "npm pack --dry-run ./dist/yui",
+    "pack:release": "npm run build && npm pack ./dist/yui --pack-destination ./dist",
     "publish:github": "node scripts/prepare-github-package.mjs && npm publish ./dist/yui --registry=https://npm.pkg.github.com"
   },
   "peerDependencies": {

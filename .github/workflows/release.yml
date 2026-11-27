@@ -1,0 +1,38 @@
+name: Release npm package
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: npm-release
+
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run pack:release
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(node -p "require('./dist/yui/package.json').version")
+          tag="v${version}"
+          if [[ -n "$(git ls-remote --tags origin "refs/tags/$tag")" ]]; then
+            git fetch origin "refs/tags/$tag"
+            if [[ "$(git rev-parse 'FETCH_HEAD^{commit}')" != "$GITHUB_SHA" ]]; then
+              echo "Tag $tag already points to a different commit."
+              exit 1
+            fi
+          fi
+          gh release create "$tag" "dist/yui-${version}.tgz" \
+            --target "$GITHUB_SHA" --title "YUI v${version}" --generate-notes
